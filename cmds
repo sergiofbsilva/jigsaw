@@ -1,0 +1,14 @@
+export PATH=~/bin/java9/Contents/Home/bin:$PATH
+rm -rf mods/*
+rm -rf mods/org.fenixedu.foo && mkdir mods/org.fenixedu.foo && javac -d mods/org.fenixedu.foo $(find org.fenixedu.foo/src -name '*.java')
+rm -rf mods/org.fenixedu.bar && mkdir mods/org.fenixedu.bar && javac -modulepath mods/ -d mods/org.fenixedu.bar $(find org.fenixedu.bar/src -name '*.java')
+
+rm -rf mlib && mkdir mlib
+jar --create --file mlib/foo.jar -C mods/org.fenixedu.foo .
+jar --create --file mlib/bar.jar --main-class org.fenixedu.bar.gamma.Gamma -C mods/org.fenixedu.bar .
+java -mp mlib -m org.fenixedu.bar
+
+rm -rf myimage
+export JDKMODS=~/bin/java9/Contents/Home/jmods/
+jlink --modulepath $JDKMODS:mlib --addmods org.fenixedu.bar --output myimage
+myimage/bin/java -listmods
