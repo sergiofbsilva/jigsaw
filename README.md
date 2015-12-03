@@ -3,7 +3,7 @@
 # setup
 
 1. Download Jdk9 Early Build with Project Jigsaw from https://jdk9.java.net/jigsaw/ and unpack it in ~/bin/java9
-2. export PATH=~/bin/java9/Contents/Home/bin:$PATH
+2. `export PATH=~/bin/java9/Contents/Home/bin:$PATH`
 
 #examples
 
